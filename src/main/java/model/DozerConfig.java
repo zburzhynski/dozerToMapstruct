@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Mappings.
+ * Dozer configuration.
  */
-@XmlRootElement
+@XmlRootElement(name = "mappings")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Mappings implements Serializable {
+public class DozerConfig implements Serializable {
 
     @XmlElement(name = "configuration")
     private Configuration configuration;

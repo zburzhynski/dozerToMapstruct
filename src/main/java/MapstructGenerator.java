@@ -1,6 +1,6 @@
+import model.DozerConfig;
 import model.Field;
 import model.Mapping;
-import model.Mappings;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,32 +30,32 @@ public class MapstructGenerator {
     private static final String MAPPER_NAME = "Mapper.java";
     private static final String MAPPER_INTERFACE = "public interface Mapper" + SPACE + LEFT_BRACKET;
 
-    private Mappings mappings;
+    private DozerConfig dozerConfig;
 
-    public MapstructGenerator(Mappings mappings) {
-        this.mappings = mappings;
+    public MapstructGenerator(DozerConfig dozerConfig) {
+        this.dozerConfig = dozerConfig;
     }
 
     public void generate() throws IOException {
         //TODO: 1. custom converter
         //TODO: 2. NsiEntryCreateRequest clarify
         FileWriter writer = new FileWriter(MAPPER_NAME);
-        generateImports(writer, mappings);
+        generateImports(writer, dozerConfig);
         writer.write(LINE_BREAK);
         writer.write(MAPPER_INTERFACE);
         writer.write(LINE_BREAK);
         writer.write(LINE_BREAK);
-        for (Mapping mapping : mappings.getMappings()) {
+        for (Mapping mapping : dozerConfig.getMappings()) {
             generateMethod(writer, mapping);
         }
         writer.write(RIGHT_BRACKET);
         writer.close();
     }
 
-    private void generateImports(FileWriter writer, Mappings mappings) throws IOException {
+    private void generateImports(FileWriter writer, DozerConfig dozerConfig) throws IOException {
         writer.write(MAPSTRUCT_IMPORT);
         writer.write(LINE_BREAK);
-        Set<String> unique = mappings.getMappings().stream().map(Mapping::getClassA).collect(Collectors.toSet());
+        Set<String> unique = dozerConfig.getMappings().stream().map(Mapping::getClassA).collect(Collectors.toSet());
         for (String mapping : unique) {
             String importName = String.format(IMPORT_TEMPLATE, mapping);
             writer.write(importName);

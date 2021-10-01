@@ -1,4 +1,4 @@
-import model.Mappings;
+import model.DozerConfig;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -6,14 +6,14 @@ import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
 
 /**
- * Dozer config parser.
+ * Dozer configuration parser.
  */
 public class DozerConfigParser {
 
-    public Mappings parse(InputStream is) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Mappings.class);
+    public DozerConfig parse(InputStream is) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(DozerConfig.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (Mappings) unmarshaller.unmarshal(is);
+        return (DozerConfig) unmarshaller.unmarshal(is);
     }
 
 }
