@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -80,8 +81,9 @@ public class MapstructGenerator {
         String sourceClass = mapping.getClassA();
         String sourceEntityName = sourceClass.substring(sourceClass.lastIndexOf(DOT) + 1);
         if (CollectionUtils.isNotEmpty(mapping.getFields())) {
-            for (Field field : mapping.getFields()) {
-                long count = mapping.getFields().stream().map(Field::getA).filter(a -> a.equals(field.getA())).count();
+            Set<Field> uniqueMapping = new LinkedHashSet<>(mapping.getFields());
+            for (Field field : uniqueMapping) {
+                long count = uniqueMapping.stream().map(Field::getA).filter(a -> a.equals(field.getA())).count();
                 if (!field.getA().equals(field.getB()) || count > 1) {
                     String annotation;
                     String template = StringUtils.isBlank(field.getConverter()) ? ANNOTATION_TEMPLATE : ANNOTATION_WITH_QUALIFIER_TEMPLATE;
