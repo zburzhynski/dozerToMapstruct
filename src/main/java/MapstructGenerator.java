@@ -21,7 +21,7 @@ public class MapstructGenerator {
     private static final String MAPPER_INTERFACE = CommonConstant.JAVA_INTERFACE + CommonConstant.SPACE + MAPPER_NAME + CommonConstant.SPACE + CommonConstant.LEFT_BRACKET;
     private static final String METHOD_TEMPLATE = "%s to%s(%s %s);";
     private static final String ANNOTATION_TEMPLATE = "@Mapping(%s = \"%s\", target = \"%s\")";
-    private static final String ANNOTATION_WITH_QUALIFIER_TEMPLATE = "@Mapping(%s = \"%s\", target = \"%s\", qualifiedByName = \"%s\")";
+    private static final String ANNOTATION_WITH_QUALIFIER_TEMPLATE = "@Mapping(%s = \"%s\", target = \"%s\"/*, qualifiedByName = \"%s\"*/)";
     private static final String CONSTANT_PREFIX = "class.simpleName";
     private static final String CONSTANT = "constant";
     private static final String SOURCE = "source";
@@ -83,9 +83,9 @@ public class MapstructGenerator {
                     String annotation;
                     String template = StringUtils.isBlank(field.getConverter()) ? ANNOTATION_TEMPLATE : ANNOTATION_WITH_QUALIFIER_TEMPLATE;
                     if (field.getA().equals(CONSTANT_PREFIX)) {
-                        annotation = String.format(template, CONSTANT, sourceEntityName, field.getB(), field.getConverter());
+                        annotation = String.format(template, CONSTANT, StringUtils.capitalize(sourceEntityName), StringUtils.uncapitalize(field.getB()), field.getConverter());
                     } else {
-                        annotation = String.format(template, SOURCE, field.getA(), field.getB(), field.getConverter());
+                        annotation = String.format(template, SOURCE, StringUtils.uncapitalize(field.getA()), StringUtils.uncapitalize(field.getB()), field.getConverter());
                     }
                     writer.append(CommonConstant.TAB_SPACE);
                     writer.write(annotation);
