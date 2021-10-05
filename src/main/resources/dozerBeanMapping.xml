@@ -2387,7 +2387,7 @@
         </field>
     </mapping>
 
-     <mapping map-null="false" map-empty-string="false">
+    <mapping map-null="false" map-empty-string="false">
         <class-a>ru.lanit.hcs.nsi.impl.persistence.model.inspection.erp.InspectionErpProcecutors</class-a>
         <class-b>ru.lanit.hcs.nsi.api.dto.NsiEntity</class-b>
         <field>
@@ -2813,7 +2813,7 @@
         </field>
     </mapping>
 
-<!-- -->
+    <!-- -->
 
     <mapping map-null="false" map-empty-string="false">
         <class-a>ru.lanit.hcs.nsi.impl.persistence.model.DocumentRubric</class-a>
@@ -2848,9 +2848,9 @@
             <b>fieldValue4</b>
         </field>
         <field custom-converter="ru.lanit.hcs.nsi.impl.dozer.BooleanToRussianStringValueMapper">
-        <a>manualFormingPossible</a>
-        <b>fieldValue5</b>
-    </field>
+            <a>manualFormingPossible</a>
+            <b>fieldValue5</b>
+        </field>
         <field>
             <a>sortOrder</a>
             <b>fieldValue6</b>
@@ -5207,7 +5207,7 @@
         </field-->
     </mapping>
 
-<mapping map-null="false" map-empty-string="false">
+    <mapping map-null="false" map-empty-string="false">
         <class-a>ru.lanit.hcs.nsi.impl.persistence.model.BikTmp</class-a>
         <class-b>ru.lanit.hcs.nsi.api.dto.NsiEntity</class-b>
         <field>
